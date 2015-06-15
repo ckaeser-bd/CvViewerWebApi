@@ -18,11 +18,8 @@ namespace CvViewerWebApi.Migrations
             {
                 new Employee {FirstName = "Christian", LastName = "Käser"},
                 new Employee {FirstName = "Daniel", LastName = "Handschin"},
-                new Employee {FirstName = "Susen", LastName = "Walther"},
-                new Employee {FirstName = "Patrick", LastName = "Götschi"},
-                new Employee {FirstName = "Markus", LastName = "Brügger"},
-                new Employee {FirstName = "Jörg", LastName = "Heymoz"},
-                new Employee {FirstName = "Urs", LastName = "Kloter"},
+                new Employee {FirstName = "Michael ", LastName = "Seifried"},
+                new Employee {FirstName = "Jörg", LastName = "Heimoz"},
             };
 
             employees.ForEach(e => context.Employees.Add(e));
