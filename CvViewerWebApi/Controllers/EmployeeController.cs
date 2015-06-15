@@ -12,19 +12,19 @@ namespace CvViewerWebApi.Controllers
 {
     public class EmployeeController : ApiController
     {
-        private EmployeeContext db = new EmployeeContext();
+        private readonly EmployeeContext _db = new EmployeeContext();
 
         // GET: api/Employee
         public IQueryable<Employee> GetEmployees()
         {
-            return db.Employees;
+            return _db.Employees;
         }
 
         // GET: api/Employee/5
         [ResponseType(typeof(Employee))]
         public async Task<IHttpActionResult> GetEmployee(int id)
         {
-            Employee employee = await db.Employees.FindAsync(id);
+            var employee = await _db.Employees.FindAsync(id);
             if (employee == null)
             {
                 return NotFound();
@@ -47,11 +47,11 @@ namespace CvViewerWebApi.Controllers
                 return BadRequest();
             }
 
-            db.Entry(employee).State = EntityState.Modified;
+            _db.Entry(employee).State = EntityState.Modified;
 
             try
             {
-                await db.SaveChangesAsync();
+                await _db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -59,10 +59,7 @@ namespace CvViewerWebApi.Controllers
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -77,8 +74,8 @@ namespace CvViewerWebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Employees.Add(employee);
-            await db.SaveChangesAsync();
+            _db.Employees.Add(employee);
+            await _db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = employee.Id }, employee);
         }
@@ -87,14 +84,14 @@ namespace CvViewerWebApi.Controllers
         [ResponseType(typeof(Employee))]
         public async Task<IHttpActionResult> DeleteEmployee(int id)
         {
-            Employee employee = await db.Employees.FindAsync(id);
+            var employee = await _db.Employees.FindAsync(id);
             if (employee == null)
             {
                 return NotFound();
             }
 
-            db.Employees.Remove(employee);
-            await db.SaveChangesAsync();
+            _db.Employees.Remove(employee);
+            await _db.SaveChangesAsync();
 
             return Ok(employee);
         }
@@ -103,14 +100,14 @@ namespace CvViewerWebApi.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool EmployeeExists(int id)
         {
-            return db.Employees.Count(e => e.Id == id) > 0;
+            return _db.Employees.Count(e => e.Id == id) > 0;
         }
     }
 }

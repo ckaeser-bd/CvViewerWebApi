@@ -27,3 +27,22 @@ namespace CvViewerWebApi.Migrations
         }
     }
 }
+
+
+/*
+Fiddler:
+-----------------------------------------------------------
+Post http://employeewebapi.azurewebsites.net/api/employee/
+-----------------------------------------------------------
+User-Agent: Fiddler
+Host: employeewebapi.azurewebsites.net
+Content-Type: application/json
+Content-Length: 45
+----------------------------------------------------------
+{"LastName":"Käser","FirstName":"Christian"}
+{"LastName":"Handschin","FirstName":"Daniel"}
+{"LastName":"AAAAA","FirstName":"BBBBB"}
+{"LastName":"AAAAA","FirstName":"CCCCC"} 
+{"LastName":"AAAAA","FirstName":"BCBCB"}
+
+*/
