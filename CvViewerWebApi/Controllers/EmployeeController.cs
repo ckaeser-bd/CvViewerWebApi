@@ -4,12 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using CvViewerWebApi.DAL;
 using CvViewerWebApi.Models;
 
 namespace CvViewerWebApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class EmployeeController : ApiController
     {
         private readonly EmployeeContext _db = new EmployeeContext();
